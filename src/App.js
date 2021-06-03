@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setBooks } from './actions/books';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    const { books } = this.props.books;
+    const { setBooks } = this.props;
+    const newBooks = [
+      {
+        id: 0,
+        title: 'Three Comrades ' + new Date(),
+      },
+    ];
+
+    return (
+      <div>
+        <h1>{books[0].title}</h1>
+        <button onClick={() => setBooks(newBooks)}>SET BOOK</button>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  ...state,
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   setBooks: (books) => dispatch(setBooks(books)),
+// });
+
+const actionCreators = {
+  setBooks,
+};
+
+export default connect(mapStateToProps, actionCreators)(App);
+
+// connect() takes 2 functions
+// one function will return state
+// another will return methods
