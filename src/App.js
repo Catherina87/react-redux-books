@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container, Card } from 'semantic-ui-react';
 import { setBooks } from './actions/books';
 import axios from 'axios';
+
+import MenuComponent from './components/Menu';
+import BookCard from './components/BookCard'
 
 class App extends Component {
   componentDidMount() {
@@ -15,16 +19,16 @@ class App extends Component {
     const { books, isReady } = this.props;
 
     return (
-      <ul>
-        {!isReady
-          ? 'Loading...'
-          : books.map((book, index) => (
-              <li key={index}>
-                <b>{book.title}</b> - {book.author}
-                <img src={book.image} alt="attr"></img>
-              </li>
-            ))}
-      </ul>
+      <Container>
+        <MenuComponent />
+        <Card.Group itemsPerRow={4}>
+          {!isReady
+            ? 'Loading...'
+            : books.map((book, index) => (
+                <BookCard key={index} {...book} />
+              ))}
+        </Card.Group>
+      </Container>
     );
   }
 }
