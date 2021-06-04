@@ -11,7 +11,7 @@ function MenuComponent() {
           Total: &nbsp; $<b>0</b>
         </Menu.Item>
 
-        <Menu.Item name="help">Cart</Menu.Item>
+        <Menu.Item name="help">Cart (<b>0</b>)</Menu.Item>
       </Menu.Menu>
     </Menu>
   );
